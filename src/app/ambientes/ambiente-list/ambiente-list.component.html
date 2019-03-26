@@ -1,0 +1,7 @@
+<ap-search 
+    (onTyping)="filter = $event" [value]="filter">
+</ap-search>
+
+<ap-ambiente 
+    [photos]="ambientes | filterByDescription: filter">
+</ap-ambiente>

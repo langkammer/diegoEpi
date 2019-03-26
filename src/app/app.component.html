@@ -1,12 +1,35 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <span class="badge badge-primary">Epi Facil</span>
+    </a>
 
-<mat-toolbar  color="primary">    
-          <span class="example-spacer"></span>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">
+              <i class="fa fa-picture-o" aria-hidden="true"></i>
+              Ambientes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fa fa-wrench" aria-hidden="true"></i>
+              Epis
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link">Login</a>
+          </li>
 
-          <button mat-button>Logar</button>
-</mat-toolbar>
+      </ul>
 
-<mat-sidenav-container>
-    <i class="fa fa-check"></i>
+      </div>
 
-</mat-sidenav-container>
+  </nav>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
