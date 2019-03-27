@@ -1,10 +1,5 @@
 export interface Ambiente {
-    id:number;
-    postDate:Date;
-    url:string;
-    description:string;
-    allowComments:boolean;
-    likes:number;
-    comments:number;
-    userId:number;     
+    titulo:string;
+    descricao:string;
+    urlimg:string;
 }

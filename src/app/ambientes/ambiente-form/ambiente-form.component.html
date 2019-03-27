@@ -1,36 +1,71 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
       <form class="form-horizontal">
           <fieldset>
             <legend>Novo Ambiente</legend>
             <div class="form-group">
-              <label class="col-md-4 control-label" for="nomeAmbienteinput">Nome Ambiente</label>  
-              <div class="col-md-4">
-              <input id="nomeAmbienteinput" name="nomeAmbienteinput" type="text" placeholder="Nome Abiente" class="form-control input-md" required="">
+              <label class="col-md-12 control-label" for="nomeAmbienteinput">Nome Ambiente</label>  
+              <div class="col-md-12">
+              <input id="nomeAmbienteinput" name="nomeAmbienteinput" type="text" placeholder="Nome Abiente" class="form-control input-md" [(ngModel)]="ambiente.titulo" required="">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label" for="descricaoAmbiente">Descrição Ambiente</label>
-              <div class="col-md-4">                     
-                <textarea class="form-control" id="descricaoAmbiente" name="descricaoAmbiente"></textarea>
+              <label class="col-md-12 control-label" for="descricaoAmbiente">Descrição Ambiente</label>
+              <div class="col-md-12">                     
+                <textarea class="form-control" id="descricaoAmbiente" name="descricaoAmbiente" [(ngModel)]="ambiente.descricao"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label" for="fileInputFoto">Img Ambiente</label>
-              <div class="col-md-4">
-                <input id="fileInputFoto" name="fileInputFoto" class="input-file" type="file">
+              <div class="col-md-6">
+                  <img src="..." alt="..." class="rounded">
               </div>
+              <div>
+                  <label class="control-label" for="fileInputFoto">Img Ambiente</label>
+                  <input id="fileInputFoto" name="fileInputFoto" class="input-file" type="file">
+              </div>
+          
             </div>
+            
+            <!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="btnSalvar"></label>
-              <div class="col-md-4">
-                <button id="btnSalvar" name="btnSalvar" class="btn btn-primary">Salvar</button>
+                <label class="col-md-12 control-label" for="selectbasic">Cabeça</label>
+                <div class="col-md-12">
+                  <select id="selectbasic" name="selectbasic" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                  </select>
+                </div>
               </div>
-            </div>
+              
+              <!-- Select Basic -->
+              <div class="form-group">
+                <label class="col-md-12 control-label" for="selectbasic">Dorso</label>
+                <div class="col-md-12">
+                  <select id="selectbasic" name="selectbasic" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                  </select>
+                </div>
+              </div>
+              
+              <!-- Select Basic -->
+              <div class="form-group">
+                <label class="col-md-12 control-label" for="selectbasic">Pés</label>
+                <div class="col-md-12">
+                  <select id="selectbasic" name="selectbasic" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label class="col-md-12 control-label" for="btnSalvar"></label>
+                  <div class="col-md-12">
+                    <button id="btnSalvar" name="btnSalvar" class="btn btn-primary" (click)="save()">Salvar</button>
+                  </div>
+                </div>
           </fieldset>
       </form>      
   </div>
-  <div class="col-md-6">
-      <img src="..." alt="..." class="rounded">
-  </div>
+  
 </div>

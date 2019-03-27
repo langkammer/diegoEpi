@@ -12,7 +12,7 @@ export class FilterByDescription implements PipeTransform {
 
         if(descriptionQuery) {
             return ambiente.filter(photo => 
-                photo.description.toLowerCase().includes(descriptionQuery)
+                photo.descricao.toLowerCase().includes(descriptionQuery)
             );
         } else {
             return ambiente;

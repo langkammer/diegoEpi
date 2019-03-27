@@ -1,11 +1,12 @@
 export const environment = {
     production: false,
     firebase: {
-      apiKey: '<your-key>',
-      authDomain: '<your-project-authdomain>',
-      databaseURL: '<your-database-URL>',
-      projectId: '<your-project-id>',
-      storageBucket: '<your-storage-bucket>',
-      messagingSenderId: '<your-messaging-sender-id>'
+      apiKey: "AIzaSyA3dFBHWpMDQCfdKwyLfLd_aIua7w_Fd1M",
+      authDomain: "epifacildiego.firebaseapp.com",
+      databaseURL: "https://epifacildiego.firebaseio.com",
+      projectId: "epifacildiego",
+      storageBucket: "epifacildiego.appspot.com",
+      messagingSenderId: "601387392874"
     }
   };
+
