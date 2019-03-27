@@ -2,6 +2,6 @@
     (onTyping)="filter = $event" [value]="filter">
 </ap-search>
 
-<ap-ambiente 
-    [photos]="ambientes | filterByDescription: filter">
-</ap-ambiente>
+<ap-ambientes 
+    [ambientes]="ambientes | filterByDescription: filter">
+</ap-ambientes>
