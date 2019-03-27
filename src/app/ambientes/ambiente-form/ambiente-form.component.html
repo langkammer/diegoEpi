@@ -1,3 +1,36 @@
-<p>
-  photo-form works!
-</p>
+<div class="row">
+  <div class="col-md-6">
+      <form class="form-horizontal">
+          <fieldset>
+            <legend>Novo Ambiente</legend>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="nomeAmbienteinput">Nome Ambiente</label>  
+              <div class="col-md-4">
+              <input id="nomeAmbienteinput" name="nomeAmbienteinput" type="text" placeholder="Nome Abiente" class="form-control input-md" required="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="descricaoAmbiente">Descrição Ambiente</label>
+              <div class="col-md-4">                     
+                <textarea class="form-control" id="descricaoAmbiente" name="descricaoAmbiente"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="fileInputFoto">Img Ambiente</label>
+              <div class="col-md-4">
+                <input id="fileInputFoto" name="fileInputFoto" class="input-file" type="file">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="btnSalvar"></label>
+              <div class="col-md-4">
+                <button id="btnSalvar" name="btnSalvar" class="btn btn-primary">Salvar</button>
+              </div>
+            </div>
+          </fieldset>
+      </form>      
+  </div>
+  <div class="col-md-6">
+      <img src="..." alt="..." class="rounded">
+  </div>
+</div>

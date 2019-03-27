@@ -3,16 +3,31 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { AmbienteFormComponent } from './ambientes/ambiente-form/ambiente-form.component';
 import { AmbienteListComponent } from './ambientes/ambiente-list/ambiente-list.component';
 import { NgModule } from '@angular/core';
+import { PrincipalComponent } from './principal/principal.component';
+import { LoginComponent } from './login/login.component';
+import { EpiComponent } from './epi/epi.component';
 
 
 const routes: Routes = [
+    {
+        path: 'login',
+        component : LoginComponent
+    },
+    {
+        path: 'home',
+        component : PrincipalComponent
+    },
     { 
-        path: 'ambiente/lista', 
+        path: 'ambientes', 
         component: AmbienteListComponent
     },
     { 
-        path: 'ambiente/add', 
+        path: 'add-ambiente', 
         component: AmbienteFormComponent 
+    },
+    { 
+        path: 'epis', 
+        component: EpiComponent
     },
     { 
         path: '**', 

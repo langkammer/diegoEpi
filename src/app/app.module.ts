@@ -9,6 +9,9 @@ import { ErrorsModule } from './errors/errors.module';
 import { AppRoutingModule } from './app.routing.module';
 import { AmbientesModule } from './ambientes/ambiente.module';
 import { environment } from './environments/environment';
+import { PrincipalModule } from './principal/principal.module';
+import { LoginModule } from './login/login.module';
+import { EpiModule } from './epi/epi.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { environment } from './environments/environment';
     MyMaterialModule,
     AppRoutingModule,
     ErrorsModule,
+    PrincipalModule,
+    LoginModule,
+    EpiModule,
     AngularFireModule.initializeApp(environment.firebase)
 
     

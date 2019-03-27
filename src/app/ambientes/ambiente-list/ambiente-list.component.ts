@@ -1,5 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Ambiente } from '../ambiente/ambiente';
 import { AmbienteService } from '../ambiente/ambiente.service';
@@ -19,8 +20,15 @@ export class AmbienteListComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private ambienteService: AmbienteService
-  ) { }
+    private ambienteService: AmbienteService,
+    private router: Router
+  ) { 
+
+  }
+
+  vaiParaAdd= function () {
+    this.router.navigateByUrl('/add-ambiente');
+  };
 
   ngOnInit(): void {
     this.userName = this.activatedRoute.snapshot.params.userName;
