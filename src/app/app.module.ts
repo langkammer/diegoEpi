@@ -9,8 +9,9 @@ import { AppRoutingModule } from './app.routing.module';
 import { AmbientesModule } from './ambientes/ambiente.module';
 import { PrincipalModule } from './principal/principal.module';
 import { LoginModule } from './login/login.module';
-import { EpiModule } from './epi/epi.module';
 import { FirebaseModuleImports } from './firebase/firebase.mdule';
+import { EpisModule } from './epi/epis.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,11 @@ import { FirebaseModuleImports } from './firebase/firebase.mdule';
     ErrorsModule,
     PrincipalModule,
     LoginModule,
-    EpiModule
+    EpisModule
   ],
   exports : [
-    FirebaseModuleImports
+    FirebaseModuleImports,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,7 +5,8 @@ import { AmbienteListComponent } from './ambientes/ambiente-list/ambiente-list.c
 import { NgModule } from '@angular/core';
 import { PrincipalComponent } from './principal/principal.component';
 import { LoginComponent } from './login/login.component';
-import { EpiComponent } from './epi/epi.component';
+import { EpiListComponent } from './epi/epis/epi-list/epi-list.component';
+import { EpiFormComponent } from './epi/epis/epi-form/epi-form.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,11 @@ const routes: Routes = [
     },
     { 
         path: 'epis', 
-        component: EpiComponent
+        component: EpiListComponent
+    },
+    { 
+        path: 'add-epi', 
+        component: EpiFormComponent 
     },
     { 
         path: '**', 

@@ -1,0 +1,56 @@
+<form class="form-horizontal">
+        <fieldset>
+          <legend>Novo Epi</legend>
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="nomeAmbienteinput">Nome Epi</label>  
+            <div class="col-md-12">
+              <input id="nomeAmbienteinput" name="nomeAmbienteinput" type="text" placeholder="Nome Epi" class="form-control input-md" [(ngModel)]="epi.nome" required="">
+            </div>
+            <label class="col-md-12 control-label" for="nomeAmbienteinput">Codigo Epi</label>  
+            <div class="col-md-12">
+              <input id="nomeAmbienteinput" name="nomeAmbienteinput" type="text" placeholder="Codigo Epi" class="form-control input-md" [(ngModel)]="epi.codigo" required="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="descricaoAmbiente">Descrição Epi</label>
+            <div class="col-md-12">                     
+              <textarea class="form-control" id="descricaoAmbiente" name="descricaoAmbiente" [(ngModel)]="epi.descricao"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+              <div class="col-12">
+                  <img [src]="imgURL" height="200" *ngIf="imgURL" class="rounded">
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="col-12">
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                      </div>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="fileInputFoto" (change)="fileChange($event)">
+                        <label class="custom-file-label" for="inputGroupFile01">Escolher Arquivo</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label class="col-md-12 control-label" for="selectbasic">Onde Veste?</label>
+              <div class="col-md-12">
+                <select id="selectbasic" name="selectbasic" class="form-control" [(ngModel)]="epi.localVestimenta">
+                  <option value="CABECA">Cabeça</option>
+                  <option value="MAOS">Mãos</option>
+                  <option value="PEITORAL">Peitoral</option>
+                  <option value="PES">Pés</option>
+                </select>
+              </div>
+            </div>
+          <div class="form-group">
+              <label class="col-md-12 control-label" for="btnSalvar"></label>
+              <div class="col-md-12">
+                <button id="btnSalvar" name="btnSalvar" class="btn btn-primary" (click)="save()">Salvar</button>
+              </div>
+          </div>
+        </fieldset>
+    </form>    

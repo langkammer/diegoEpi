@@ -10,6 +10,7 @@ import { AmbienteModule } from './ambiente/ambiente.module';
         AmbienteFormModule,
         AmbienteListModule,
         DarkenOnHoverModule
+
     ]
 })
 export class AmbientesModule {}

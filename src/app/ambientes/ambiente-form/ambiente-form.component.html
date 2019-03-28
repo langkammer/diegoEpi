@@ -1,71 +1,84 @@
-<div class="row">
-  <div class="col-md-12">
-      <form class="form-horizontal">
-          <fieldset>
-            <legend>Novo Ambiente</legend>
-            <div class="form-group">
-              <label class="col-md-12 control-label" for="nomeAmbienteinput">Nome Ambiente</label>  
-              <div class="col-md-12">
-              <input id="nomeAmbienteinput" name="nomeAmbienteinput" type="text" placeholder="Nome Abiente" class="form-control input-md" [(ngModel)]="ambiente.titulo" required="">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-12 control-label" for="descricaoAmbiente">Descrição Ambiente</label>
-              <div class="col-md-12">                     
-                <textarea class="form-control" id="descricaoAmbiente" name="descricaoAmbiente" [(ngModel)]="ambiente.descricao"></textarea>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-6">
-                  <img src="..." alt="..." class="rounded">
-              </div>
-              <div>
-                  <label class="control-label" for="fileInputFoto">Img Ambiente</label>
-                  <input id="fileInputFoto" name="fileInputFoto" class="input-file" type="file">
-              </div>
-          
-            </div>
-            
-            <!-- Select Basic -->
-            <div class="form-group">
-                <label class="col-md-12 control-label" for="selectbasic">Cabeça</label>
-                <div class="col-md-12">
-                  <select id="selectbasic" name="selectbasic" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
-                  </select>
-                </div>
-              </div>
-              
-              <!-- Select Basic -->
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="selectbasic">Dorso</label>
-                <div class="col-md-12">
-                  <select id="selectbasic" name="selectbasic" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
-                  </select>
-                </div>
-              </div>
-              
-              <!-- Select Basic -->
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="selectbasic">Pés</label>
-                <div class="col-md-12">
-                  <select id="selectbasic" name="selectbasic" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                  <label class="col-md-12 control-label" for="btnSalvar"></label>
-                  <div class="col-md-12">
-                    <button id="btnSalvar" name="btnSalvar" class="btn btn-primary" (click)="save()">Salvar</button>
+<form class="form-horizontal">
+    <fieldset>
+      <legend>Novo Ambiente</legend>
+      <div class="form-group">
+        <label class="col-md-12 control-label" for="nomeAmbienteinput">Nome Ambiente</label>  
+        <div class="col-md-12">
+        <input id="nomeAmbienteinput" name="nomeAmbienteinput" type="text" placeholder="Nome Abiente" class="form-control input-md" [(ngModel)]="ambiente.titulo" required="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-12 control-label" for="descricaoAmbiente">Descrição Ambiente</label>
+        <div class="col-md-12">                     
+          <textarea class="form-control" id="descricaoAmbiente" name="descricaoAmbiente" [(ngModel)]="ambiente.descricao"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+          <div class="col-12">
+              <img [src]="imgURL" height="200" *ngIf="imgURL" class="rounded">
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-12">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                   </div>
-                </div>
-          </fieldset>
-      </form>      
-  </div>
-  
-</div>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="fileInputFoto" (change)="fileChange($event)">
+                    <label class="custom-file-label" for="inputGroupFile01">Escolher Arquivo</label>
+                  </div>
+              </div>
+              <div class="progress">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="uploadPercent" aria-valuemin="0" aria-valuemax="100" ></div>
+              </div>
+          </div>
+      </div>
+      
+       <!-- Select Basic -->
+       <div class="form-group">
+          <label class="col-md-12 control-label" for="selectbasic">Cabeça</label>
+          <div class="col-md-12">
+            <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.cabeca">
+                <option *ngFor="let o of itemsCabeca | async" [value]="o.key">{{o.nome}}</option>
+            </select>
+          </div>
+        </div>
+
+       
+        <!-- Select Basic -->
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="selectbasic">Peitoral</label>
+          <div class="col-md-12">
+            <select id="selectbasic" name="selectbasic" class="form-control" [(ngModel)]="ambiente.peitoral">
+              <option *ngFor="let o of itemsPeitoral | async" [value]="o.key">{{o.nome}}</option>
+            </select>
+          </div>
+        </div>
+         <!-- Select Basic -->
+      <div class="form-group">
+          <label class="col-md-12 control-label" for="selectbasic">Mãos</label>
+          <div class="col-md-12">
+            <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.maos">
+                <option *ngFor="let o of itemsMaos | async" [value]="o.key">{{o.nome}}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Select Basic -->
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="selectbasic">Pés</label>
+          <div class="col-md-12">
+            <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.pes"> 
+              <option *ngFor="let o of itemsPes | async" [value]="o.key">{{o.nome}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-12 control-label" for="btnSalvar"></label>
+            <div class="col-md-12">
+              <button id="btnSalvar" name="btnSalvar" class="btn btn-primary" (click)="save()">Salvar</button>
+            </div>
+          </div>
+    </fieldset>
+</form>    

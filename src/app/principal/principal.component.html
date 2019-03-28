@@ -1,3 +1,11 @@
-<p>
-  <img src="assets/model-worker/workers.jpg" height="50%" width="50%">
-</p>
+<p></p>
+<ngb-carousel *ngIf="images">
+    <ng-template ngbSlide *ngFor="let i of items | async">
+      <img [src]="baseurl + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="700px" width="1200" alt="{{i.nome}}">
+      <div class="carousel-caption">
+        <h3>{{i.titulo}}</h3>
+        <p>{{i.descricao}}</p>
+      </div>
+    </ng-template>
+   
+</ngb-carousel>

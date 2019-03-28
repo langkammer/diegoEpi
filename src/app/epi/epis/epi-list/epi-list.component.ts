@@ -1,62 +1,53 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Epi } from '../Epi';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Ambiente } from '../ambiente/ambiente';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-ambiente-list',
-  templateUrl: './ambiente-list.component.html',
-  styleUrls: ['./ambiente-list.component.css']
+  selector: 'app-epi-list',
+  templateUrl: './epi-list.component.html',
+  styleUrls: ['./epi-list.component.css']
 })
-export class AmbienteListComponent implements OnInit {
+export class EpiListComponent implements OnInit {
 
-  baseurl : string = "https://firebasestorage.googleapis.com/v0/b/epifacildiego.appspot.com/o/ambientes%2F"
-  ambiente: Ambiente[] = [];
+  epi: Epi[] = [];
   filter: string = '';
   hasMore: boolean = true;
   currentPage: number = 1;
   userName: string = '';
+  baseurl : string = "https://firebasestorage.googleapis.com/v0/b/epifacildiego.appspot.com/o/epis%2F"
 
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
-
-
-
-
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     db: AngularFireDatabase,
-    private router: Router
+  ) { 
+    this.itemsRef = db.list('epis');
 
-    ) { 
-    this.itemsRef = db.list('ambientes');
-
-    
     this.items =  this.itemsRef.snapshotChanges().pipe(
       map(changes => 
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
     console.log("ambientes...",this.items)  
+
   }
 
   vaiParaAdd= function () {
-    this.router.navigateByUrl('/add-ambiente');
+    this.router.navigateByUrl('/add-epi');
   };
-
-  deleteItem(key: string) {
-    this.itemsRef.remove(key);
-  }
 
   ngOnInit(): void {
     this.userName = this.activatedRoute.snapshot.params.userName;
-    this.ambiente = this.activatedRoute.snapshot.data['ambientes'];
-
-
-
+    this.epi = this.activatedRoute.snapshot.data['epis'];
   }
-
+  deleteItem(key: string) {
+    this.itemsRef.remove(key);
+  }
 }

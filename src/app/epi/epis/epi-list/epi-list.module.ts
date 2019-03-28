@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
+import { EpiListComponent } from './epi-list.component';
 import { DarkenOnHoverModule } from 'src/app/shared/directives/darken-on-hover/darken-on-hover.module';
-import { AmbienteListComponent } from './ambiente-list.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
-        AmbienteListComponent
+        EpiListComponent
     ],
     imports: [ 
         CommonModule ,
@@ -14,4 +14,4 @@ import { FormsModule } from '@angular/forms';
         DarkenOnHoverModule
     ]
 })
-export class AmbienteListModule {}
+export class EpisListModule {}
