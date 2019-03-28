@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 
 
 
-import { Ambiente } from '../ambiente/ambiente';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,12 +11,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./ambiente-form.component.css']
 })
 export class AmbienteFormComponent implements OnInit {
-  itemRef: AngularFireObject<any>;
-  item: Observable<any>;
+  itemsCollection: AngularFirestoreCollection<Ambiente>;
+  items: Observable<Ambiente[]>;
 
-  constructor(db: AngularFireDatabase) {
-    this.itemRef = db.object('ambientes');
-    this.item = this.itemRef.valueChanges();
+  ambiente : any = {};
+  
+  constructor(db: AngularFirestore) {
+    this.itemsCollection = db.collection<Ambiente>('ambientes');
+    this.items = this.itemsCollection.valueChanges();
   }
 
   ngOnInit() {
@@ -28,13 +29,9 @@ export class AmbienteFormComponent implements OnInit {
 
   save() {
     console.log("ambiente")
-    // this.itemRef.set({ name: newName });
+    console.log(this.itemsCollection)
+    this.itemsCollection.add(this.ambiente);
   }
-  update(newSize: string) {
-    this.itemRef.update({ size: newSize });
-  }
-  delete() {
-    this.itemRef.remove();
-  }
+  
 
 }
