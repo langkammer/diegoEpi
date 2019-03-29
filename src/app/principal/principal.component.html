@@ -35,7 +35,54 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Montar Epi</ng-template>
-       <img src="assets/HUMAN/HUMAN.png">
+       <div class="row">
+          <div class="col-3">
+              <h2>Epis </h2>
+              <div
+              cdkDropList
+              [cdkDropListData]="items"
+              class="example-list"
+              cdkDropListSortingDisabled
+              (cdkDropListDropped)="drop($event)"
+              >
+              
+              <div class="example-box" *ngFor="let i of itemsEpi | async" cdkDrag>
+                  <div class="card-group">
+                      <div class="card" >
+                        <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'"   class="card-img-top"alt="{{i.nome}}">
+                        <div class="card-body">
+                          <h5 class="card-title">{{i.nome}}</h5>
+                          <p class="card-text">
+                              Nome : {{i.nome}}
+                              Codigo Epi :  {{i.codigo}}
+                          </p>
+                        </div>
+    
+                      </div>
+                  </div>
+                
+              </div>
+            </div>
+           </div>  
+    
+          <div class="col-3">
+              <h2>Epis</h2>
+              <div
+              cdkDropList
+              [cdkDropListData]="resultado"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of resultadoCabeca" cdkDrag>
+                {{item.nome}}
+              </div>
+              </div>
+          </div>
+          <div class="col-6">
+              <img src="../assets/HUMAN/HUMAN.png">
+    
+          </div>
+       </div>
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>

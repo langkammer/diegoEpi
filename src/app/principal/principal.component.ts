@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Ambiente } from '../ambientes/ambiente/ambiente';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { transferArrayItem, CdkDragDrop, moveItemInArray, CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'ap-principal',
@@ -14,19 +15,56 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class PrincipalComponent {
     baseurl : string = "https://firebasestorage.googleapis.com/v0/b/epifacildiego.appspot.com/o/ambientes%2F"
+    baseurlEpi : string = "https://firebasestorage.googleapis.com/v0/b/epifacildiego.appspot.com/o/epis%2F"
+
     ambiente: Ambiente[] = [];
+    
     userName: string = '';
 
     isLinear = false;
+
     firstFormGroup: FormGroup;
   
-
-
     itemsRef: AngularFireList<any>;
+
     items: Observable<any[]>;
     
-    images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
+    itemsEpi: Observable<any[]>;
 
+    resultado: any[];
+    //
+    newItems = [
+      'Item 0',
+      'Item 1',
+      'Item 2',
+      'Item 3',
+    ]
+    
+    activeItems = [
+      'Item 4',
+      'Try to move me',
+    ]
+
+    filteredItems: Array<any>;
+
+ 
+    drop(event: CdkDragDrop<string[]>) {
+      console.log(event);
+      if (event.previousContainer === event.container) {
+        moveItemInArray(
+          event.container.data, 
+           event.previousIndex, 
+           event.currentIndex
+        );
+       } else {
+         transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
+        );
+      }
+    }
     
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -37,12 +75,27 @@ export class PrincipalComponent {
         ) { 
         this.itemsRef = db.list('ambientes');
     
-        
-        this.items =  this.itemsRef.snapshotChanges().pipe(
+        this.items.subscribe((_items)=> {
+          this.filteredItems = [];
+          _items.forEach(item => {
+              if( item.name.toLowerCase().indexOf(item.toLowerCase()) > -1) {
+                  this.filteredItems.push({ key: item.payload.key, ...item.payload.val() });
+              } 
+          })
+        });        
+
+
+        // this.items =  this.itemsRef.snapshotChanges().pipe(
+        //   map(changes => 
+        //     changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        //   )
+        // );
+        this.itemsEpi = db.list('/epis').snapshotChanges().pipe(
           map(changes => 
             changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
           )
         );
+    
         console.log("ambientes...",this.items)  
       }
 
