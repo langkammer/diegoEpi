@@ -31,7 +31,8 @@ import { RouterModule } from '@angular/router';
   ],
   exports : [
     FirebaseModuleImports,
-    RouterModule
+    RouterModule,
+    MyMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

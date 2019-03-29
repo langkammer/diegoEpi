@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Ambiente } from '../ambientes/ambiente/ambiente';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'ap-principal',
@@ -16,15 +17,22 @@ export class PrincipalComponent {
     ambiente: Ambiente[] = [];
     userName: string = '';
 
+    isLinear = false;
+    firstFormGroup: FormGroup;
+  
+
+
     itemsRef: AngularFireList<any>;
     items: Observable<any[]>;
     
     images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
 
+    
     constructor(
         private activatedRoute: ActivatedRoute,
         db: AngularFireDatabase,
-        private router: Router
+        private router: Router,
+        private _formBuilder: FormBuilder
     
         ) { 
         this.itemsRef = db.list('ambientes');
@@ -42,9 +50,17 @@ export class PrincipalComponent {
         this.userName = this.activatedRoute.snapshot.params.userName;
         this.ambiente = this.activatedRoute.snapshot.data['ambientes'];
     
-    
+        this.firstFormGroup = this._formBuilder.group({
+          nome: ['', Validators.required]
+        });
+
     
       }
+
+      selecionarAmbiente(i){
+        console.log(i);
+      }
+      
 
 
 }

@@ -1,11 +1,45 @@
 <p></p>
-<ngb-carousel *ngIf="images">
-    <ng-template ngbSlide *ngFor="let i of items | async">
-      <img [src]="baseurl + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="700px" width="1200" alt="{{i.nome}}">
-      <div class="carousel-caption">
-        <h3>{{i.titulo}}</h3>
-        <p>{{i.descricao}}</p>
+<mat-horizontal-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Seu Nome</ng-template>
+        <p></p>
+        <mat-form-field class="step-full-width">
+          <input matInput placeholder="Digite seu nome" formControlName="nome" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button  matStepperNext [disabled]="!this.firstFormGroup.value.nome" color="primary">Proximo </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step >
+        <ng-template matStepLabel>Ambiente</ng-template>
+        <div class="card-group">
+            <div class="card" *ngFor="let i of items | async">
+              <img [src]="baseurl + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="300px"  class="card-img-top"alt="{{i.nome}}">
+              <div class="card-body">
+                <h5 class="card-title">{{i.titulo}}</h5>
+                <p class="card-text">
+                 {{i.descricao}}
+                </p>
+              </div>
+              <div class="card-footer">
+                  <button mat-raised-button  matStepperNext (click)="selecionarAmbiente(i)">Selecionar</button>
+              </div>
+            </div>
+        </div>
+        <div>
+          <p></p>
+          <button mat-raised-button matStepperPrevious>Voltar</button>
+        </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Montar Epi</ng-template>
+       <img src="assets/HUMAN/HUMAN.png">
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
-    </ng-template>
-   
-</ngb-carousel>
+    </mat-step>
+</mat-horizontal-stepper>
+
