@@ -21,36 +21,72 @@ export class PrincipalComponent {
     
     userName: string = '';
 
+    teste = {
+      nome : '',
+      ambiente : {}
+    };
+
     isLinear = false;
 
     firstFormGroup: FormGroup;
   
     items: Observable<any[]>;
     
-    todoMaos = [];
 
-    listMaos = [];
+    listLuvas = [];
+
+    listCalcados = [];
+
+    listVestimentas = [];
+
+    listCapacetes = [];
+
+    listOculos = [];
+
+    listProtetAuric = [];
+
+    listProtetFacial = [];
+
+    listProtetRes = [];
 
 
-    todoPes = [];
 
-    todoPeitoral = [];
+    todoLuvas = [];
 
-    todoCabeca = [];
+    todoCalcados = [];
+
+    todoVestimentas = [];
+
+    todoCapacetes = [];
+
+    todoOculos= [];
+
+    todoProtetAuric = [];
+
+    todoProtetFacial = [];
+
+    todoProtetRes = [];
+
 
     done = [];
    
-    limitPage = 3;
+    limitPage = 1;
 
-    totalPagesMaos = 0;
+    paginaLuvas = 0;
 
-    pageNumberMaos = 1;
+    paginaCalcados = 0;
 
-    pageNumberPeitoral = 1;
+    paginaVestimentas = 0;
 
-    pageNumberPes = 1;
+    paginaCapacetes = 0;
 
-    pageNumberCabeca = 1;
+    paginaOculos= 0;
+
+    paginaProtetAuric = 0;
+
+    paginaProtetFacial = 0;
+
+    paginaProtetRes = 0;
 
 
  
@@ -68,7 +104,8 @@ export class PrincipalComponent {
     constructor(
         private activatedRoute: ActivatedRoute,
         db: AngularFireDatabase,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private router: Router
         ) { 
         this.inicializaListaEpis(db);
 
@@ -78,18 +115,8 @@ export class PrincipalComponent {
 
      
 
-      nextPageMaos(){
-        this.todoMaos = this.listMaos.slice(this.pageNumberMaos * this.limitPage, (this.pageNumberMaos + 1) * this.limitPage);
-        this.pageNumberMaos += 1;
-        console.log("LISTA GUARDADA",this.listMaos);
-        console.log("LISTA POS PAGINA",this.todoMaos);
-
-      }
-      
-      lastPageMaos(){
-
-      }
-
+     
+   
 
       ngOnInit(): void {
         this.userName = this.activatedRoute.snapshot.params.userName;
@@ -103,10 +130,13 @@ export class PrincipalComponent {
       }
 
       selecionarAmbiente(i){
-        console.log(i);
+        this.teste.ambiente = i;
+        this.teste.nome = this.firstFormGroup.value.nome;
+        console.log("TESTE SELECIONADO", this.teste);
       }
 
       verificarResultado(){
+        this.router.navigate(['resultado', {resultado : this.teste, episSelecionados : this.done} ]);
 
       }
 
@@ -120,67 +150,315 @@ export class PrincipalComponent {
       }
 
       inicializaListaEpis(db: AngularFireDatabase){
-        db.list('/epis',  ref => ref.orderByChild('localVestimenta').equalTo('MAOS')).snapshotChanges().subscribe( data =>{
+        db.list('/epis',  ref => ref.orderByChild('localVestimenta').equalTo('LUVAS')).snapshotChanges().subscribe( data =>{
           if (data) {
-            this.totalPagesMaos = data.length;
-            this.montaArrayMaos(data)
+            this.montaArrayLuvas(data)
           }
         })
       
-        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PEITORAL')).snapshotChanges().subscribe( data =>{
+        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('CAPACETE')).snapshotChanges().subscribe( data =>{
           if (data) {
-            this.montaArrayPeitoral(data)
+            this.montaArrayCapacete(data)
           }
         })
 
-        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PES')).snapshotChanges().subscribe( data =>{
+        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('VESTIMENTAS')).snapshotChanges().subscribe( data =>{
           if (data) {
-            this.montaArrayPes(data)
+            this.montaArrayVestimenta(data)
           }
         })
 
-        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('CABECA')).snapshotChanges().subscribe( data =>{
+        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('CALCADOS')).snapshotChanges().subscribe( data =>{
           if (data) {
-            this.montaArrayCabeca(data)
+            this.montaArrayCalcados(data)
+          }
+        })
+
+
+        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('OCULOS')).snapshotChanges().subscribe( data =>{
+          if (data) {
+            this.montaArrayOculos(data)
+          }
+        })
+
+        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PROTETORES_AURICULARES')).snapshotChanges().subscribe( data =>{
+          if (data) {
+            this.montaArrayProtetorAuriculares(data)
+          }
+        })
+
+        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PROTETORES_FACIAIS')).snapshotChanges().subscribe( data =>{
+          if (data) {
+            this.montaArrayProtetorFaciais(data)
+          }
+        })
+
+        db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PROTETORES_RESPIRATORIOS')).snapshotChanges().subscribe( data =>{
+          if (data) {
+            this.montaArrayProtetorRespiratorios(data)
           }
         })
       }
 
 
-      montaArrayMaos(c){
+      montaArrayCapacete(c){
         c.forEach( userData =>{
-          this.listMaos.push({ key: userData.payload.key, ...userData.payload.val() }); 
+          this.listCapacetes.push({ key: userData.payload.key, ...userData.payload.val() }); 
         });
-        console.log("ini ", this.listMaos);
-        this.todoMaos = this.listMaos.slice(this.pageNumberMaos * this.limitPage, (this.pageNumberMaos + 1) * this.limitPage);
-        console.log("fim ", this.todoMaos);
-        // function paginate (array, page_size, page_number) {
-        //   --page_number; // because pages logically start with 1, but technically with 0
-        //   return array.slice(page_number * page_size, (page_number + 1) * page_size);
-        // }
+        this.todoCapacetes = this.paginate(this.listCapacetes,this.limitPage,this.paginaCapacetes);
+      }
+      
+
+      montaArrayLuvas(c){
+        c.forEach( userData =>{
+          this.listLuvas.push({ key: userData.payload.key, ...userData.payload.val() }); 
+        });
+        this.todoLuvas = this.paginate(this.listLuvas,this.limitPage,this.paginaLuvas);
+      }
+
+   
+      
+      montaArrayVestimenta(c){
+        c.forEach( userData =>{
+          this.listVestimentas.push({ key: userData.payload.key, ...userData.payload.val() }); 
+        });
+        this.todoVestimentas = this.paginate(this.listVestimentas,this.limitPage,this.paginaVestimentas);
+      }
+    
+            
+      montaArrayCalcados(c){
+        c.forEach( userData =>{
+          this.listCalcados.push({ key: userData.payload.key, ...userData.payload.val() }); 
+        });
+        this.todoCalcados = this.paginate(this.listCalcados,this.limitPage,this.paginaCalcados);
+      }
+    
+
+  
+      montaArrayOculos(c){
+        c.forEach( userData =>{
+          this.listOculos.push({ key: userData.payload.key, ...userData.payload.val() }); 
+        });
+        this.todoOculos = this.paginate(this.listOculos,this.limitPage,this.paginaOculos);
+      }
+    
+      montaArrayProtetorAuriculares(c){
+        c.forEach( userData =>{
+          this.listProtetAuric.push({ key: userData.payload.key, ...userData.payload.val() }); 
+        });
+        this.todoProtetAuric = this.paginate(this.listProtetAuric,this.limitPage,this.paginaProtetAuric);
+      }
+    
+      montaArrayProtetorFaciais(c){
+        c.forEach( userData =>{
+          this.listProtetFacial.push({ key: userData.payload.key, ...userData.payload.val() }); 
+        });
+        this.todoProtetFacial = this.paginate(this.listProtetFacial,this.limitPage,this.paginaProtetFacial);
+      }
+      
+
+          
+      montaArrayProtetorRespiratorios(c){
+        c.forEach( userData =>{
+          this.listProtetRes.push({ key: userData.payload.key, ...userData.payload.val() }); 
+        });
+        this.todoProtetRes = this.paginate(this.listProtetRes,this.limitPage,this.paginaProtetRes);
+      }
+      
+
+      nextPageCapacete(){
+        this.todoCapacetes = [];
+
+        if(this.paginaCapacetes == 0){
+          this.paginaCapacetes += 1;
+          this.todoCapacetes = this.paginate(this.listCapacetes,this.limitPage,this.paginaCapacetes);
+        }
+        else{
+          if(this.paginaCapacetes + 1 < this.listCapacetes.length && this.paginaCapacetes + 1 != this.listCapacetes.length)
+            this.paginaCapacetes += 1;
+          this.todoCapacetes = this.paginate(this.listCapacetes,this.limitPage,this.paginaCapacetes);
+
+        }
+
+
+
+      }
+      
+      lastPageCapacete(){
+        if(this.paginaCapacetes != 0){
+          this.paginaCapacetes -= 1;
+        }
+        this.todoCapacetes = this.paginate(this.listCapacetes,this.limitPage,this.paginaCapacetes);
+      }
+
+
+      nextPageVestimentas(){
+        this.todoVestimentas = [];
+
+        if(this.paginaVestimentas == 0){
+          this.paginaVestimentas += 1;
+          this.todoVestimentas = this.paginate(this.listVestimentas,this.limitPage,this.paginaVestimentas);
+        }
+        else{
+          if(this.paginaVestimentas + 1 < this.listVestimentas.length && this.paginaVestimentas + 1 != this.listVestimentas.length)
+            this.paginaVestimentas += 1;
+          this.todoVestimentas = this.paginate(this.listVestimentas,this.limitPage,this.paginaVestimentas);
+
+        }
+       
+      }
+      
+      lastPageVestimentas(){
+        if(this.paginaVestimentas != 0){
+          this.paginaVestimentas -= 1;
+        }
+        this.todoVestimentas = this.paginate(this.listVestimentas,this.limitPage,this.paginaVestimentas);
+      }
+
+
+      nextPageLuvas(){
+        this.todoLuvas = [];
+
+        if(this.paginaLuvas == 0){
+          this.paginaLuvas += 1;
+          this.todoLuvas = this.paginate(this.listLuvas,this.limitPage,this.paginaLuvas);
+        }
+        else{
+          if(this.paginaLuvas + 1 < this.listLuvas.length && this.paginaLuvas + 1 != this.listLuvas.length)
+            this.paginaLuvas += 1;
+          this.todoLuvas = this.paginate(this.listLuvas,this.limitPage,this.paginaLuvas);
+
+        }
+      }
+      
+      lastPageLuvas(){
+        if(this.paginaLuvas != 0){
+          this.paginaLuvas -= 1;
+        }
+        this.todoLuvas = this.paginate(this.listLuvas,this.limitPage,this.paginaLuvas);
+
+      }
+
+
+
+      nextPageCalcado(){
+        this.todoCalcados = [];
+
+        if(this.paginaCalcados == 0){
+          this.paginaCalcados += 1;
+          this.todoCalcados = this.paginate(this.listCalcados,this.limitPage,this.paginaCalcados);
+        }
+        else{
+          if(this.paginaCalcados + 1 < this.listCalcados.length && this.paginaCalcados + 1 != this.listCalcados.length)
+            this.paginaCalcados += 1;
+          this.todoCalcados = this.paginate(this.listCalcados,this.limitPage,this.paginaCalcados);
+        }
+      }
+      
+      lastPageCaldado(){
+        if(this.paginaCalcados != 0){
+          this.paginaCalcados -= 1;
+        }
+        this.todoCalcados = this.paginate(this.listCalcados,this.limitPage,this.paginaCalcados);
+
+      }
+
+
+      nextPageOculos(){
+        this.todoOculos = [];
+
+        if(this.paginaOculos == 0){
+          this.paginaOculos += 1;
+          this.todoOculos = this.paginate(this.listOculos,this.limitPage,this.paginaOculos);
+        }
+        else{
+          if(this.paginaOculos + 1 < this.listOculos.length && this.paginaOculos + 1 != this.listOculos.length)
+            this.paginaOculos += 1;
+          this.todoOculos = this.paginate(this.listOculos,this.limitPage,this.paginaOculos);
+        }
+      }
+      
+      lastPageOculos(){
+        if(this.paginaOculos != 0){
+          this.paginaOculos -= 1;
+        }
+        this.todoOculos = this.paginate(this.listOculos,this.limitPage,this.paginaOculos);
+      }
+
+
+      nextPageProtAuric(){
+        this.todoProtetAuric = [];
+
+        if(this.paginaProtetAuric == 0){
+          this.paginaProtetAuric += 1;
+          this.todoProtetAuric = this.paginate(this.listProtetAuric,this.limitPage,this.paginaProtetAuric);
+        }
+        else{
+          if(this.paginaProtetAuric + 1 < this.listProtetAuric.length && this.paginaProtetAuric + 1 != this.listProtetAuric.length)
+            this.paginaProtetAuric += 1;
+          this.todoProtetAuric = this.paginate(this.listProtetAuric,this.limitPage,this.paginaProtetAuric);
+        }
+      }
+      
+      lastPageProtAuric(){
+
+        if(this.paginaProtetAuric != 0){
+          this.paginaProtetAuric -= 1;
+        }
+        this.todoProtetAuric = this.paginate(this.listProtetAuric,this.limitPage,this.paginaProtetAuric);
         
-        // console.log(paginate([1, 2, 3, 4, 5, 6], 2, 2));
-        // console.log(paginate([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 4, 1));
       }
 
-      montaArrayPes(c){
-        c.forEach( userData =>{
-          this.todoPes.push({ key: userData.payload.key, ...userData.payload.val() }); 
-        });
-      }
+      nextPageProtFacial(){
+        this.todoProtetFacial = [];
 
-      montaArrayCabeca(c){
-        c.forEach( userData =>{
-          this.todoCabeca.push({ key: userData.payload.key, ...userData.payload.val() }); 
-        });
-      }
-
-      montaArrayPeitoral(c){
-        c.forEach( userData =>{
-          this.todoPeitoral.push({ key: userData.payload.key, ...userData.payload.val() }); 
-        });
+        if(this.paginaProtetFacial == 0){
+          this.paginaProtetFacial += 1;
+          this.todoProtetFacial = this.paginate(this.listProtetFacial,this.limitPage,this.paginaProtetFacial);
+        }
+        else{
+          if(this.paginaProtetFacial + 1 < this.listProtetFacial.length && this.paginaProtetFacial + 1 != this.listProtetFacial.length)
+            this.paginaProtetFacial += 1;
+          this.todoProtetFacial = this.paginate(this.listProtetFacial,this.limitPage,this.paginaProtetFacial);
+        }
       }
       
+      lastPageProtFacial(){
+        if(this.paginaProtetFacial != 0){
+          this.paginaProtetFacial -= 1;
+        }
+        this.todoProtetFacial = this.paginate(this.listProtetFacial,this.limitPage,this.paginaProtetFacial);
+
+      }
+
+      nextPageProtRes(){
+        this.todoProtetRes = [];
+
+        if(this.paginaProtetRes == 0){
+          this.paginaProtetRes += 1;
+          this.todoProtetRes = this.paginate(this.listProtetRes,this.limitPage,this.paginaProtetRes);
+        }
+        else{
+          if(this.paginaProtetRes + 1 < this.listProtetRes.length && this.paginaProtetRes + 1 != this.listProtetRes.length)
+            this.paginaProtetRes += 1;
+          this.todoProtetRes = this.paginate(this.listProtetRes,this.limitPage,this.paginaProtetRes);
+        }
+      }
+      
+      lastPageProtRes(){
+        if(this.paginaProtetFacial != 0){
+          this.paginaProtetRes -= 1;
+        }
+        this.todoProtetRes = this.paginate(this.listProtetRes,this.limitPage,this.paginaProtetRes);
+
+      }
+
+
+
+
+      paginate (array, page_size, page_number) {
+        return array.slice(page_number * page_size, (page_number + 1) * page_size);
+      }
 
 
 }

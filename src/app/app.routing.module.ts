@@ -7,6 +7,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { LoginComponent } from './login/login.component';
 import { EpiListComponent } from './epi/epis/epi-list/epi-list.component';
 import { EpiFormComponent } from './epi/epis/epi-form/epi-form.component';
+import { ResultadoComponent } from './resultado_teste/resultado.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
     },
     {
         path: 'home',
+        component : PrincipalComponent
+    },
+    {
+        path: '',
         component : PrincipalComponent
     },
     { 
@@ -33,6 +38,11 @@ const routes: Routes = [
     { 
         path: 'add-epi', 
         component: EpiFormComponent 
+    },
+    {
+        path: 'resultado',
+        component: ResultadoComponent,
+        data : {}
     },
     { 
         path: '**', 

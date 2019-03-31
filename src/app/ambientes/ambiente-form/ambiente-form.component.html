@@ -37,10 +37,17 @@
       
        <!-- Select Basic -->
        <div class="form-group">
-          <label class="col-md-12 control-label" for="selectbasic">Cabeça</label>
-          <div class="col-md-12">
-            <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.cabeca">
-                <option *ngFor="let o of itemsCabeca | async" [value]="o.key">{{o.nome}}</option>
+          <label class="col-md-12 control-label" for="selectbasic">Capacetes</label>
+          <div class="col-12">
+              <img [src]="baseurl + ambiente.capacete + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" *ngIf="ambiente.capacete"  height="10%" class="rounded">
+          </div>
+          <div class="col-12">
+            <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.capacete">
+                <option value="SEM">NAO USA</option>
+
+                <option *ngFor="let o of itemsCapacetes | async" [value]="o.key">
+                    {{o.nome}} COD EPI {{o.codigo}}
+                </option>
             </select>
           </div>
         </div>
@@ -48,32 +55,122 @@
        
         <!-- Select Basic -->
         <div class="form-group">
-          <label class="col-md-12 control-label" for="selectbasic">Peitoral</label>
+          <label class="col-md-12 control-label" for="selectbasic">Vestimentas</label>
+          <div class="col-12">
+              <img [src]="baseurl + ambiente.vestimentas + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" *ngIf="ambiente.vestimentas"  height="10%" class="rounded">
+          </div>
           <div class="col-md-12">
-            <select id="selectbasic" name="selectbasic" class="form-control" [(ngModel)]="ambiente.peitoral">
-              <option *ngFor="let o of itemsPeitoral | async" [value]="o.key">{{o.nome}}</option>
+            <select id="selectbasic" name="selectbasic" class="form-control" [(ngModel)]="ambiente.vestimentas">
+                <option value="SEM">NAO USA</option>
+
+              <option *ngFor="let o of itemsVestimentas | async" [value]="o.key">
+                {{o.nome}} COD EPI {{o.codigo}}
+              </option>
             </select>
           </div>
         </div>
          <!-- Select Basic -->
       <div class="form-group">
-          <label class="col-md-12 control-label" for="selectbasic">Mãos</label>
+          <label class="col-md-12 control-label" for="selectbasic">Luvas</label>
+          <div class="col-12">
+              <img [src]="baseurl + ambiente.luvas + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" *ngIf="ambiente.luvas"  height="10%" class="rounded">
+          </div>
           <div class="col-md-12">
-            <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.maos">
-                <option *ngFor="let o of itemsMaos | async" [value]="o.key">{{o.nome}}</option>
+            <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.luvas">
+                <option value="SEM">NAO USA</option>
+
+                <option *ngFor="let o of itemsLuvas | async" [value]="o.key">
+                  {{o.nome}}  COD EPI {{o.codigo}}
+                </option>
             </select>
           </div>
         </div>
 
         <!-- Select Basic -->
         <div class="form-group">
-          <label class="col-md-12 control-label" for="selectbasic">Pés</label>
+          <label class="col-md-12 control-label" for="selectbasic">Calçado</label>
+          <div class="col-12">
+              <img [src]="baseurl + ambiente.calcado + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" *ngIf="ambiente.calcado"  height="10%" class="rounded">
+          </div>
           <div class="col-md-12">
-            <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.pes"> 
-              <option *ngFor="let o of itemsPes | async" [value]="o.key">{{o.nome}}</option>
+            <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.calcado"> 
+                <option value="SEM">NAO USA</option>
+
+              <option *ngFor="let o of itemsCalcados | async" [value]="o.key">
+                  {{o.nome}}  COD EPI {{o.codigo}}
+              </option>
             </select>
           </div>
         </div>
+
+         <!-- Select Basic -->
+         <div class="form-group">
+            <label class="col-md-12 control-label" for="selectbasic">Oculos</label>
+            <div class="col-12">
+                <img [src]="baseurl + ambiente.oculos + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" *ngIf="ambiente.oculos"  height="10%" class="rounded">
+            </div>
+            <div class="col-md-12">
+              <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.oculos"> 
+                  <option value="SEM">NAO USA</option>
+
+                <option *ngFor="let o of itemsOculos | async" [value]="o.key">
+                    {{o.nome}}  COD EPI {{o.codigo}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+           <!-- Select Basic -->
+         <div class="form-group">
+            <label class="col-md-12 control-label" for="selectbasic">Protetor Auricular</label>
+            <div class="col-12">
+                <img [src]="baseurl + ambiente.protetor_auricular + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" *ngIf="ambiente.protetor_auricular"  height="10%" class="rounded">
+            </div>
+            <div class="col-md-12">
+              <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.protetor_auricular"> 
+                  <option value="SEM">NAO USA</option>
+
+                <option *ngFor="let o of itemsProtetAuric | async" [value]="o.key">
+                    {{o.nome}}  COD EPI {{o.codigo}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+
+           <!-- Select Basic -->
+         <div class="form-group">
+            <label class="col-md-12 control-label" for="selectbasic">Protetor Facial</label>
+            <div class="col-12">
+                <img [src]="baseurl + ambiente.protetor_facial + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" *ngIf="ambiente.protetor_facial"  height="10%" class="rounded">
+            </div>
+            <div class="col-md-12">
+              <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.protetor_facial"> 
+                  <option value="SEM">NAO USA</option>
+                <option *ngFor="let o of itemsProtetFacial | async" [value]="o.key">
+                    {{o.nome}}  COD EPI {{o.codigo}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+
+               <!-- Select Basic -->
+         <div class="form-group">
+            <label class="col-md-12 control-label" for="selectbasic">Protetor Respiratorio</label>
+            <div class="col-12">
+                <img [src]="baseurl + ambiente.protetor_respiratorio + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" *ngIf="ambiente.protetor_respiratorio"  height="10%" class="rounded">
+            </div>
+            <div class="col-md-12">
+              <select id="selectbasic" name="selectbasic" class="form-control"  [(ngModel)]="ambiente.protetor_respiratorio"> 
+                <option value="SEM">NAO USA</option>
+                <option *ngFor="let o of itemsProtetRes | async" [value]="o.key">
+                    {{o.nome}}  COD EPI {{o.codigo}}
+                </option>
+              </select>
+            </div>
+          </div>
+
         <div class="form-group">
             <label class="col-md-12 control-label" for="btnSalvar"></label>
             <div class="col-md-12">

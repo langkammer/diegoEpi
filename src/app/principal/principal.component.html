@@ -40,52 +40,86 @@
           <button mat-raised-button  mat-button (click)="verificarResultado()" color="primary">Verificar Resultado</button>
       </div>
        <div class="row">
+          <div class="col-12">
+                <h2>Epis</h2>
+                <div
+                cdkDropList
+                #doneList="cdkDropList"
+                [cdkDropListData]="done"
+                [cdkDropListConnectedTo]="[todoCapacete,todoVestm,todoLuv,todoCalcad,todoOculo,todoPaurc,todoPfacila,todoResp]"
+                class="example-list col-12"
+                (cdkDropListDropped)="drop($event)">
+                <div *ngFor="let i of done" cdkDrag>
+                    <div  class="col-2">
+                        <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
+                        <h6 class=" text-sm-center">{{i.nome}}</h6>
+                        <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
+                    </div>
+                </div>
+            </div>
+         </div>
           <div class="col-2">
-              <h2>Capacetes </h2>
+              <h4>Capacetes </h4>
               <div
               cdkDropList
-              #todoList="cdkDropList"
-              [cdkDropListData]="todoCabeca"
+              #todoCapacete="cdkDropList"
+              [cdkDropListData]="todoCapacetes"
               [cdkDropListConnectedTo]="[doneList]"
               class="example-list"
               (cdkDropListDropped)="drop($event)">
-              <div *ngFor="let i of todoCabeca" cdkDrag>
+              <div *ngFor="let i of todoCapacetes" cdkDrag>
                   <div >
                       <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
                       <h6 class=" text-sm-center">{{i.nome}}</h6>
                       <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
                   </div>
+              </div>
+              <div class="row">
+                    <div class="col-6">
+                        <button mat-raised-button color="warn" (click)="lastPageCapacete()"> << - </button>
+                    </div>
+                    <div class="col-6">
+                        <button mat-raised-button color="accent" (click)="nextPageCapacete()"> - >></button>
+                    </div>
               </div>
             </div>
            </div>  
            <div class="col-2">
-              <h2>Peitoral </h2>
+              <h4>Vestimentas </h4>
               <div
               cdkDropList
-              #todoList="cdkDropList"
-              [cdkDropListData]="todoPeitoral"
+              #todoVestm="cdkDropList"
+              [cdkDropListData]="todoVestimentas"
               [cdkDropListConnectedTo]="[doneList]"
               class="example-list"
               (cdkDropListDropped)="drop($event)">
-              <div *ngFor="let i of todoPeitoral" cdkDrag>
+              <div *ngFor="let i of todoVestimentas" cdkDrag>
                   <div >
                       <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
                       <h6 class=" text-sm-center">{{i.nome}}</h6>
                       <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
                   </div>
               </div>
+              <div class="row">
+                    <div class="col-6">
+                        <button mat-raised-button color="warn" (click)="lastPageVestimentas()"> << - </button>
+                    </div>
+                    <div class="col-6">
+                        <button mat-raised-button color="accent" (click)="nextPageVestimentas()"> - >></button>
+                    </div>
+              </div>
             </div>
            </div>
            <div class="col-2">
-              <h2>Luvas </h2>
+              <h4>Luvas </h4>
               <div
               cdkDropList
-              #todoList="cdkDropList"
-              [cdkDropListData]="todoMaos"
+              #todoLuv="cdkDropList"
+              [cdkDropListData]="todoLuvas"
               [cdkDropListConnectedTo]="[doneList]"
               class="example-list"
               (cdkDropListDropped)="drop($event)">
-              <div *ngFor="let i of todoMaos" cdkDrag>
+              <div *ngFor="let i of todoLuvas" cdkDrag>
                   <div >
                       <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
                       <h6 class=" text-sm-center">{{i.nome}}</h6>
@@ -94,55 +128,154 @@
               </div>
               <div class="row">
                 <div class="col-6">
-                    <button mat-raised-button color="warn" (click)="lastPageMaos()"> << - </button>
+                    <button mat-raised-button color="warn" (click)="lastPageLuvas()"> << - </button>
                 </div>
                 <div class="col-6">
-                    <button mat-raised-button color="accent" (click)="nextPageMaos()"> - >></button>
+                    <button mat-raised-button color="accent" (click)="nextPageLuvas()"> - >></button>
                 </div>
               </div>
             </div>
            </div>
            <div class="col-2">
-              <h2>Calçados </h2>
+              <h4>Calçados </h4>
               <div
-              cdkDropList
-              #todoList="cdkDropList"
-              [cdkDropListData]="todoPes"
-              [cdkDropListConnectedTo]="[doneList]"
-              class="example-list"
-              (cdkDropListDropped)="drop($event)">
-              <div *ngFor="let i of todoPes" cdkDrag>
-                  <div >
-                      <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
-                      <h6 class=" text-sm-center">{{i.nome}}</h6>
-                      <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
-                  </div>
-              </div>
+                cdkDropList
+                #todoCalcad="cdkDropList"
+                [cdkDropListData]="todoCalcados"
+                [cdkDropListConnectedTo]="[doneList]"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div *ngFor="let i of todoCalcados" cdkDrag>
+                    <div >
+                        <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
+                        <h6 class=" text-sm-center">{{i.nome}}</h6>
+                        <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-6">
+                            <button mat-raised-button color="warn" (click)="lastPageCaldado()"> << - </button>
+                        </div>
+                        <div class="col-6">
+                            <button mat-raised-button color="accent" (click)="nextPageCalcado()"> - >></button>
+                        </div>
+                </div>
 
-            </div>
+               </div>
            </div>
-          <div class="col-2">
-              <h2>Epis</h2>
-              <div
-              cdkDropList
-              #doneList="cdkDropList"
-              [cdkDropListData]="done"
-              [cdkDropListConnectedTo]="[todoList]"
-              class="example-list"
-              (cdkDropListDropped)="drop($event)">
-              <div *ngFor="let i of done" cdkDrag>
-                  <div >
-                      <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
-                      <h6 class=" text-sm-center">{{i.nome}}</h6>
-                      <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
+           <div class="col-2">
+                <h4>Oculos </h4>
+                <div
+                  cdkDropList
+                  #todoOculo="cdkDropList"
+                  [cdkDropListData]="todoOculos"
+                  [cdkDropListConnectedTo]="[doneList]"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div *ngFor="let i of todoOculos" cdkDrag>
+                      <div >
+                          <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
+                          <h6 class=" text-sm-center">{{i.nome}}</h6>
+                          <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
+                      </div>
                   </div>
-              </div>
-              </div>
-          </div>
+                  <div class="row">
+                          <div class="col-6">
+                              <button mat-raised-button color="warn" (click)="lastPageOculos()"> << - </button>
+                          </div>
+                          <div class="col-6">
+                              <button mat-raised-button color="accent" (click)="nextPageOculos()"> - >></button>
+                          </div>
+                  </div>
+  
+                 </div>
+             </div>
+             <div class="col-2">
+                <h4>Prot. Auric </h4>
+                <div
+                    cdkDropList
+                    #todoPaurc="cdkDropList"
+                    [cdkDropListData]="todoProtetAuric"
+                    [cdkDropListConnectedTo]="[doneList]"
+                    class="example-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <div *ngFor="let i of todoProtetAuric" cdkDrag>
+                        <div >
+                            <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
+                            <h6 class=" text-sm-center">{{i.nome}}</h6>
+                            <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-6">
+                                <button mat-raised-button color="warn" (click)="lastPageProtAuric()"> << - </button>
+                            </div>
+                            <div class="col-6">
+                                <button mat-raised-button color="accent" (click)="nextPageProtAuric()"> - >></button>
+                            </div>
+                    </div>
+
+                    </div>
+            </div>  
+            <div class="col-2">
+                    <h4>Prot. Facial </h4>
+                    <div
+                        cdkDropList
+                        #todoPfacila="cdkDropList"
+                        [cdkDropListData]="todoProtetFacial"
+                        [cdkDropListConnectedTo]="[doneList]"
+                        class="example-list"
+                        (cdkDropListDropped)="drop($event)">
+                        <div *ngFor="let i of todoProtetFacial" cdkDrag>
+                            <div >
+                                <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
+                                <h6 class=" text-sm-center">{{i.nome}}</h6>
+                                <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-6">
+                                    <button mat-raised-button color="warn" (click)="lastPageProtFacial()"> << - </button>
+                                </div>
+                                <div class="col-6">
+                                    <button mat-raised-button color="accent" (click)="nextPageProtFacial()"> - >></button>
+                                </div>
+                        </div>
+
+                        </div>
+          </div>   
           <div class="col-2">
+                <h4>Prot. Resp </h4>
+                <div
+                    cdkDropList
+                    #todoResp="cdkDropList"
+                    [cdkDropListData]="todoProtetRes"
+                    [cdkDropListConnectedTo]="[doneList]"
+                    class="example-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <div *ngFor="let i of todoProtetRes" cdkDrag>
+                        <div >
+                            <img [src]="baseurlEpi + i.key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="70px"  class="img-thumbnail justify-content-center">
+                            <h6 class=" text-sm-center">{{i.nome}}</h6>
+                            <h6 class=" text-sm-center">COD EPI : {{i.codigo}}</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-6">
+                                <button mat-raised-button color="warn" (click)="lastPageProtRes()"> << - </button>
+                            </div>
+                            <div class="col-6">
+                                <button mat-raised-button color="accent" (click)="nextPageProtRes()"> - >></button>
+                            </div>
+                    </div>
+
+                    </div>
+          </div>   
+          
+          <!-- <div class="col-2">
               <img src="../assets/HUMAN/HUMAN.png" class="img-thumbnail justify-content-center">
     
-          </div>
+          </div> -->
        </div>
 
     

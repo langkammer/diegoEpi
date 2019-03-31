@@ -16,6 +16,9 @@ import { Router } from '@angular/router';
 })
 export class AmbienteFormComponent implements OnInit {
 
+  baseurl : string = "https://firebasestorage.googleapis.com/v0/b/epifacildiego.appspot.com/o/epis%2F"
+
+
   itemsCollection: AngularFirestoreCollection<Ambiente>;
 
   uploadPercent: Observable<number>;
@@ -30,10 +33,22 @@ export class AmbienteFormComponent implements OnInit {
   
   itemsRef: AngularFireList<any>;
 
-  itemsPes: Observable<any[]>;
-  itemsMaos: Observable<any[]>;
-  itemsPeitoral: Observable<any[]>;
-  itemsCabeca: Observable<any[]>;
+  itemsCalcados: Observable<any[]>;
+
+  itemsLuvas: Observable<any[]>;
+
+  itemsVestimentas: Observable<any[]>;
+
+  itemsCapacetes: Observable<any[]>;
+
+  itemsOculos: Observable<any[]>;
+
+  itemsProtetAuric: Observable<any[]>;
+
+  itemsProtetFacial: Observable<any[]>;
+
+  itemsProtetRes: Observable<any[]>;
+
   // items: Observable<any[]>;
 
 
@@ -42,36 +57,62 @@ export class AmbienteFormComponent implements OnInit {
     // this.items = db.list('ambientes').valueChanges();
     this.itemsRef = db.list('ambientes');
 
-    this.itemsPes = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('CABECA'))
+    this.itemsCapacetes = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('CAPACETE'))
     .snapshotChanges().pipe(
       map(changes => 
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
 
-    this.itemsMaos = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('MAOS'))
+    this.itemsLuvas = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('LUVAS'))
     .snapshotChanges().pipe(
       map(changes => 
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
 
-    this.itemsPeitoral = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PEITORAL'))
+    this.itemsVestimentas = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('VESTIMENTAS'))
     .snapshotChanges().pipe(
       map(changes => 
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
 
-    this.itemsCabeca = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PES'))
+    this.itemsCalcados = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('CALCADOS'))
     .snapshotChanges().pipe(
       map(changes => 
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
    
+    this.itemsOculos = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('OCULOS'))
+    .snapshotChanges().pipe(
+      map(changes => 
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
 
 
+    this.itemsProtetAuric = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PROTETORES_AURICULARES'))
+    .snapshotChanges().pipe(
+      map(changes => 
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
+
+    this.itemsProtetFacial = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PROTETORES_FACIAIS'))
+    .snapshotChanges().pipe(
+      map(changes => 
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
+
+    this.itemsProtetRes = db.list('/epis', ref => ref.orderByChild('localVestimenta').equalTo('PROTETORES_RESPIRATORIOS'))
+    .snapshotChanges().pipe(
+      map(changes => 
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
     // .collection<Ambiente>('ambientes');
   }
 

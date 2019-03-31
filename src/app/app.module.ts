@@ -12,6 +12,7 @@ import { LoginModule } from './login/login.module';
 import { FirebaseModuleImports } from './firebase/firebase.mdule';
 import { EpisModule } from './epi/epis.module';
 import { RouterModule } from '@angular/router';
+import { ResultadoModule } from './resultado_teste/resultado.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RouterModule } from '@angular/router';
     ErrorsModule,
     PrincipalModule,
     LoginModule,
-    EpisModule
+    EpisModule,
+    ResultadoModule
   ],
   exports : [
     FirebaseModuleImports,
