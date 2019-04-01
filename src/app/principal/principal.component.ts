@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { Ambiente } from '../ambientes/ambiente/ambiente';
@@ -23,7 +23,8 @@ export class PrincipalComponent {
 
     teste = {
       nome : '',
-      ambiente : {}
+      ambiente : {},
+      episSelecionados : []
     };
 
     isLinear = false;
@@ -31,7 +32,8 @@ export class PrincipalComponent {
     firstFormGroup: FormGroup;
   
     items: Observable<any[]>;
-    
+
+    itemsRef: AngularFireList<any>;
 
     listLuvas = [];
 
@@ -107,6 +109,9 @@ export class PrincipalComponent {
         private _formBuilder: FormBuilder,
         private router: Router
         ) { 
+
+        this.itemsRef = db.list('resultados');
+
         this.inicializaListaEpis(db);
 
         this.inicializaAmbientes(db);
@@ -132,11 +137,18 @@ export class PrincipalComponent {
       selecionarAmbiente(i){
         this.teste.ambiente = i;
         this.teste.nome = this.firstFormGroup.value.nome;
-        console.log("TESTE SELECIONADO", this.teste);
       }
 
       verificarResultado(){
-        this.router.navigate(['resultado', {resultado : this.teste, episSelecionados : this.done} ]);
+        this.teste.episSelecionados = this.done;
+        const task =  this.itemsRef.push(this.teste);
+        task.then((value) => {
+          //SUCCESS
+          this.router.navigate(["/resultado",value.key]);
+        }, (error) => {
+            console.log(error);
+        })
+
 
       }
 

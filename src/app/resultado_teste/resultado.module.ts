@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MyMaterialModule } from '../material-module';
 import { ResultadoComponent } from './resultado.component';
+import { BlockUIModule } from 'ng-block-ui';
 
 @NgModule({
     declarations: [ResultadoComponent],
@@ -12,7 +13,9 @@ import { ResultadoComponent } from './resultado.component';
         FormsModule,
         NgbModule,
         MyMaterialModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BlockUIModule.forRoot()
+
     
     ],
 

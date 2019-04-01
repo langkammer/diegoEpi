@@ -40,9 +40,8 @@ const routes: Routes = [
         component: EpiFormComponent 
     },
     {
-        path: 'resultado',
-        component: ResultadoComponent,
-        data : {}
+        path: 'resultado/:key',
+        component: ResultadoComponent
     },
     { 
         path: '**', 
