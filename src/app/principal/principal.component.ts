@@ -140,16 +140,19 @@ export class PrincipalComponent {
       }
 
       verificarResultado(){
-        this.teste.episSelecionados = this.done;
-        const task =  this.itemsRef.push(this.teste);
-        task.then((value) => {
-          //SUCCESS
-          this.router.navigate(["/resultado",value.key]);
-        }, (error) => {
-            console.log(error);
-        })
-
-
+        if(this.teste.nome && this.teste.ambiente){
+          this.teste.episSelecionados = this.done;
+          const task =  this.itemsRef.push(this.teste);
+          task.then((value) => {
+            //SUCCESS
+            this.router.navigate(["/resultado",value.key]);
+          }, (error) => {
+              console.log(error);
+          })
+        }
+        else{
+          alert("VERIFIQUE OS PASSOS 1 E PASSO 2")
+        }
       }
 
 

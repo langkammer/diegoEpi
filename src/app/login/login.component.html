@@ -1,26 +1,29 @@
-<p>
-  Login Page
-</p>
 <div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
-
-    <!-- Icon -->
-    <div class="fadeIn first">
-      <i class="fa fa-user fa-5x" aria-hidden="true"></i>
-
-    </div>
-
-    <!-- Login Form -->
-      <input type="text" id="login" class="fadeIn second" [(ngModel)]="email" placeholder="Email">
-      <input type="text" id="password" class="fadeIn third" [(ngModel)]="senha" placeholder="Senha">
-      <input type="submit" class="fadeIn fourth" value="Log In" (click)="login()">
-      <input type="submit" class="fadeIn fourth" value="Cadastrar" (click)="criarPerfil()">
-
-    <!-- Remind Passowrd -->
-    <!-- <div id="formFooter">
-      <a class="underlineHover" href="#">Perdeu a Senha?</a>
-    </div> -->
-
-  </div>
+    <form class="form-horizontal">
+        <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-12 control-label" for="emin">Email</label>  
+                <div class="col-12">
+                  <input id="emin" name="em" type="text" placeholder="Email" class="form-control input-md" [(ngModel)]="email" required="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-12 control-label" for="sen">Senha</label>  
+                <div class="col-md-12">
+                  <input id="sen" name="sena" type="password" placeholder="Senha" class="form-control input-md" [(ngModel)]="senha" required="">
+                </div>
+            </div>
+            <div class="col-12">
+                <p></p>
+                <button type="button" class="btn btn-success btn-lg btn-block" (click)="login()">Login</button>
+            </div>
+            <p></p>
+            <hr>
+            <div class="col-12">
+                    <p></p>
+                <button type="button" class="btn btn-warning btn-lg btn-block" (click)="criarPerfil()">Cadastrar</button>
+            </div>
+        </div>
+    </form>
 </div>

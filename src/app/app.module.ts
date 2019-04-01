@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
 import { MyMaterialModule } from './material-module';
 import { ErrorsModule } from './errors/errors.module';
 import { AppRoutingModule } from './app.routing.module';
@@ -15,11 +14,10 @@ import { RouterModule } from '@angular/router';
 import { ResultadoModule } from './resultado_teste/resultado.module';
 import { BlockUIModule } from 'ng-block-ui';
 import { ResultadoListModule } from './resultado_teste/resultado-list/resultado-list.module';
+import { NavComponent } from './nav-bar/nav.component';
+import { NavModule } from './nav-bar/nav.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -33,6 +31,7 @@ import { ResultadoListModule } from './resultado_teste/resultado-list/resultado-
     EpisModule,
     ResultadoModule,
     ResultadoListModule,
+    NavModule,
     BlockUIModule.forRoot()
 
   ],
@@ -40,9 +39,8 @@ import { ResultadoListModule } from './resultado_teste/resultado-list/resultado-
     FirebaseModuleImports,
     RouterModule,
     MyMaterialModule
-
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [NavComponent]
 })
 export class AppModule { }
