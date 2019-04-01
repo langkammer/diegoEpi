@@ -40,11 +40,10 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-
+/producao
 # System Files
 .DS_Store
 Thumbs.db
 
 
 # DEFINICAO FIREBASE
-src/app/environments/environment.ts
