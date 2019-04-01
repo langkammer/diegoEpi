@@ -14,6 +14,7 @@ import { EpisModule } from './epi/epis.module';
 import { RouterModule } from '@angular/router';
 import { ResultadoModule } from './resultado_teste/resultado.module';
 import { BlockUIModule } from 'ng-block-ui';
+import { ResultadoListModule } from './resultado_teste/resultado-list/resultado-list.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { BlockUIModule } from 'ng-block-ui';
     LoginModule,
     EpisModule,
     ResultadoModule,
+    ResultadoListModule,
     BlockUIModule.forRoot()
 
   ],

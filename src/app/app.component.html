@@ -6,24 +6,40 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
-          
         </ul>
-        <ul class="navbar-nav" routerLinkActive="active">
+        <li class="nav-item"  *ngIf="email">
+            {{email}}
+        </li>
+        <ul class="navbar-nav" routerLinkActive="active" *ngIf="email">
           <li class="nav-item">
             <a class="nav-link" routerLink="ambientes">
               <i class="fa fa-picture-o" aria-hidden="true" ></i>
               Ambientes
             </a>
           </li>
-          <li class="nav-item" routerLinkActive="active">
+          <li class="nav-item" routerLinkActive="active" *ngIf="email">
             <a class="nav-link" routerLink="epis">
-              <i class="fa fa-wrench" aria-hidden="true" ></i>
+              <i class="fa fa-wrench" aria-hidden="true" *ngIf="email"></i>
               Epis
             </a>
           </li>
+          <li class="nav-item" routerLinkActive="active" *ngIf="email">
+              <a class="nav-link" routerLink="resultado/list">
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                  Resultados
+              </a>
+            </li>
+
           <li class="nav-item"  routerLinkActive="active">
               <a class="nav-link" routerLink="login">Login</a>
           </li>
+          <li class="nav-item"  routerLinkActive="active" *ngIf="email">
+              <a class="nav-link" (click)="logout()">
+                  <i class="fa fa-sign-out" aria-hidden="true"></i>
+                Logout
+              </a>
+          </li>
+
 
       </ul>
 

@@ -79,6 +79,15 @@ export class ResultadoComponent {
 
 
    popularRespostasCertas(){
+    if(this.resultado.ambiente.vestimentas!='SEM'){
+        this.blockUI.start('Carregando Respostas ...'); // Start blocking
+        this.db.object('epis/' + this.resultado.ambiente.vestimentas).snapshotChanges().subscribe( res =>{
+            if (res) {
+                this.blockUI.stop(); // Stop blocking
+                this.listaEpisCertos.push({ key: res.payload.key, ...res.payload.val() });
+            }
+        })
+    }
     if(this.resultado.ambiente.calcado!='SEM'){
         this.blockUI.start('Carregando Respostas ...'); // Start blocking
         this.db.object('epis/' + this.resultado.ambiente.calcado).snapshotChanges().subscribe( res =>{

@@ -28,32 +28,35 @@
                         <td>
                            <i class="fa fa-check fa-3x" aria-hidden="true"  *ngIf="verificaRespostaArray(i.localVestimenta,i.key)"> </i>
                            <i class="fa fa-times-circle fa-3x" aria-hidden="true" *ngIf="!verificaRespostaArray(i.localVestimenta,i.key)"></i>
-                            
-                           <div  *ngIf="!verificaRespostaArray(i.localVestimenta,i.key)">{{trazRetornoResposta(i.localVestimenta).key}}</div>
-                           <!-- <table class="table" *ngIf="!verificaRespostaArray(i.localVestimenta,i.key)">
-                            <thead>
-                                <tr>
-                                  <th scope="col-3">Img</th>
-                                  <th scope="col-4">Detalhes</th>
-            
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr >
-                                  <td>
-                                      <img [src]="baseurl + trazRetornoResposta(i.localVestimenta,i.key).key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="25%"  class="rounded">
-                                  </td>
-                                  <td>
-                                      <p> 
-                                        {{trazRetornoResposta(i.localVestimenta,i.key).nome}}
-                                        Cod Epi : 
-                                        {{trazRetornoResposta(i.localVestimenta,i.key).codigo}}
-                                      </p>
-                                  </td>
-                                </tr>
-                                </tbody>
-                              </table>    -->
-                            
+                           
+                           <div *ngIf="trazRetornoResposta(i.localVestimenta)">
+                              <table class="table" *ngIf="!verificaRespostaArray(i.localVestimenta,i.key)">
+                                  <thead>
+                                      <tr>
+                                        <th scope="col-3">Img</th>
+                                        <th scope="col-4">Detalhes</th>
+                  
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr >
+                                        <td *ngIf="trazRetornoResposta(i.localVestimenta)">
+                                            <img [src]="baseurl + trazRetornoResposta(i.localVestimenta).key + '?alt=media&token=698d7ee6-5710-4dbd-8c4e-d5f9a7026ea8'" height="25%"  class="rounded">
+                                        </td>
+                                        <td *ngIf="trazRetornoResposta(i.localVestimenta)">
+                                            <p> 
+                                              {{trazRetornoResposta(i.localVestimenta,i.key).nome}}
+                                              Cod Epi : 
+                                              {{trazRetornoResposta(i.localVestimenta,i.key).codigo}}
+                                            </p>
+                                        </td>
+                                      </tr>
+                                      </tbody>
+                                  </table>    
+                           </div>
+                           <div *ngIf="!trazRetornoResposta(i.localVestimenta)">
+                              Sem Epi para essa parte
+                           </div>
                         </td>
   
                       </tr>
